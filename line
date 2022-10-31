@@ -1,0 +1,27 @@
+class Line {
+
+	constructor (x, y, xSpeed, ySpeed){
+	this.x = x;
+	this.y = y;
+	this.xSpeed = xSpeed;
+	this.ySpeed=  ySpeed;
+
+}
+
+	move() {
+		this.x+=this.xSpeed;
+		if (this.x<0 || this.x> width){
+			this.xSpeed *=-1;
+		} 
+		this.y += this.ySpeed;
+		if (this.y<0||this.y>height){
+			this.ySpeed*=-1;
+		}
+
+	}
+ 
+ 	display (){
+ 		line(this.x, this.y);
+ 
+	}
+}
