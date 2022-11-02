@@ -2,12 +2,13 @@
 let t0;
 let t;
 let col;
-let frameR = 3;
+let frameR = 4;
 let colorRefresh = 3000; // refresh every N/1000 seconds
-let w = 850
-let l = 850
-let ellipseSize;
-let ripple;
+let ellipseForm = 1500;
+let w = 850;
+let l = 850;
+//let ellipseSize;
+//let ripple;
 
 
 
@@ -23,12 +24,10 @@ function setup() {
   
 }
 
-//mkae pos accurate to corner
 function objectPosition(t, x) {
    t = t / random(0.5,2);
   if (x) {
     return map(t, 0, colorRefresh, width*1/20, width*18/20);
-    //display.ripple;
   } else {
     return map(sin(t), -1, 1, height*1/20, height*18/20);
   }
@@ -36,7 +35,8 @@ function objectPosition(t, x) {
 }
 
 function draw() {
-  let l = 50; //circle size 
+
+  let l =20; //circle size 
   let transparency = 40; // how thick
   noStroke();
   fill(55, 88, 235, transparency); //background color
@@ -45,8 +45,7 @@ function draw() {
   t = millis();
   if ((t-t0) >= colorRefresh) {    // change circle color every colorRefresh seconds
     col.set(random(0.5,1.5)*col.x,random(0.5,1.5)*col.y,random(0.5,1.5)*col.z)
-    // reset  clock
-    t0 = t;
+    t0 = t; //reset time
     console.log("changing color ...");
   }
   noStroke();
@@ -57,24 +56,43 @@ function draw() {
   console.log(posy);
   ellipse(posx, posy, l, l);
 
-//#wtf
-  for (let ellipseSize =5; ellipseSize <= 20; ellipseSize +=1){
-      stroke(col.x, col.y, col.z, 50);
-      strokeWeight(0.75);
-      noFill();
-      ellipse(posx, posy, l, l);
+  if (t-t0){
+    ellipseSize += 3;
+
+    stroke(col.x, col.y, col.z, 50);
+    strokeWeight(0.75);
+    noFill();
+    ellipse(posx, posy, ellipseSize);
+    ellipse(posx, posy, ellipseSize*0.85);
+    ellipse(posx, posy, ellipseSize*0.75);
+    ellipse(posx, posy, ellipseSize*0.7);
+    ellipse(posx, posy, ellipseSize*0.65);
+  ellipse(posx, posy, ellipseSize*0.6);
+  ellipse(posx, posy, ellipseSize*0.55);
+  ellipse(posx, posy, ellipseSize*0.5);
+  ellipse(posx, posy, ellipseSize*0.45);
+  ellipse(posx, posy, ellipseSize*0.4);
+    ellipse(posx, posy, ellipseSize*0.35);
+  ellipse(posx, posy, ellipseSize*0.3);
+  ellipse(posx, posy, ellipseSize*0.25);
+  ellipse(posx, posy, ellipseSize*0.2);
+    ellipse(posx, posy, ellipseSize*0.15);
+      ellipse(posx, posy, ellipseSize*0.1);
+        ellipse(posx, posy, ellipseSize*0.05);
+
+
+
 
   }
-
-
+}
 /*
-  //ripple
-  ellipseSize += 5;
+  //ripple 
+  ellipseSize += 1;
 
   stroke(col.x, col.y, col.z, 50);
   strokeWeight(0.75);
   noFill();
-  ellipse(posx, posy, l, l);
+  ellipse(posx, posy, ellipseSize);
   ellipse(posx, posy, ellipseSize*0.85);
   ellipse(posx, posy, ellipseSize*0.75);
   ellipse(posx, posy, ellipseSize*0.7);
@@ -84,15 +102,14 @@ function draw() {
   ellipse(posx, posy, ellipseSize*0.5);
   ellipse(posx, posy, ellipseSize*0.45);
   ellipse(posx, posy, ellipseSize*0.4);
-  */
-
+  
 
 }
 
 
-  //water.display();
-  //console.log(posx);
-  //console.log(posy);
+//
+  console.log(posx);
+  console.log(posy);
   //console.log("");
   //ellipse(mouseX, mouseY, l, l);
   //ellipse(mouseX+l, mouseY+l, l, l);
@@ -116,6 +133,13 @@ class Ripple (){
     ellipse(this.x, this.y, this.ellipseSize*0.75);
   }
 
+
+  for (let eL = 0.05; eL <= 15; eL += 1){
+      stroke(col.x, col.y, col.z, 50);
+      strokeWeight(0.8);
+      noFill();
+      ellipse(posx, posy, l*(1+eL));
+    }
 
   /*
   ellipseSize +=5;
